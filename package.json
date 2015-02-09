@@ -1,0 +1,26 @@
+{
+  "name": "node-ms-template",
+  "version": "1.0.0",
+  "description": "Basic Node JS MS template with dpeloyment and tests",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/braidenjudd/node-ms-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/braidenjudd/node-ms-template/issues"
+  },
+  "homepage": "https://github.com/braidenjudd/node-ms-template",
+  "dependencies": {
+    "body-parser": "^1.11.0",
+    "cors": "^2.5.3",
+    "express": "^4.11.2",
+    "firebase": "^2.1.2",
+    "moment": "^2.9.0"
+  }
+}
