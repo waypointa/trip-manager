@@ -9,9 +9,9 @@ var moment = require("moment");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-var port = 80;
+var port = process.env.PORT || 8081;
 var version = process.env.VERSION || 'unknown';
-var firebaseURL = process.env.FIREBASE_URL
+var firebaseURL = process.env.FIREBASE_URL || 'trips-waypointa.firebaseio.com';
 
 // config the routes
 var router = express.Router();
@@ -19,27 +19,14 @@ var diagRouter = express.Router();
 
 // setup the routes
 router.post('/', function(req, res) {
+	var tripsRef = new Firebase(firebaseURL);
+    
+    // Create a new key
+	var tripList = tripsRef.push({ });
+	var tripListId = tripList.key();
+	var tripListURL = firebaseURL + '/' + tripListId;
 
-	// Create a new key
-	var offersRef = new Firebase(firebaseURL);
-	var offerList = offersRef.push({ });
-	var offerListId = offerList.key();
-	var offerListURL = firebaseURL + offerListId;
-	var offerListRef = new Firebase(offerListURL);
-
-	// EXAMPLE: Of pushing a result
-	// offerListRef.push({
-	// 	cost: 49,
-	// 	description: "Platinum Offer",
-	// 	aircraft: "A388",
-	// 	flight: "QF8",
-	// 	logo: "qantas.png"
-	// });
-
-	// Respond with the URL
-	res.json({
-		offerListURL: offerListURL
-	});
+    res.setHeader("Location", tripListURL);
 });
 
 // setup a diagnostic version url
@@ -51,7 +38,7 @@ diagRouter.get('/version', function (req, res) {
 });
 
 // register the routers
-app.use('/offers', router);
+app.use('/trips', router);
 app.use('/diag', diagRouter);
 
 // start the server
