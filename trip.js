@@ -1,5 +1,8 @@
-var trip = {
-	creationDate: new Date(),
+var moment = require('moment');
 
-	contributors
-};
+var New = function (username) {
+	this.creationDate = moment().unix();
+	this.createdBy = username;
+}
+
+module.exports.New = New;
